@@ -4,9 +4,9 @@ public class PropertyValue {
 
     private String name;
 
-    private String value;
+    private Object value;
 
-    public PropertyValue(String name, String value) {
+    public PropertyValue(String name, Object value) {
         this.name = name;
         this.value = value;
     }
@@ -19,11 +19,11 @@ public class PropertyValue {
         this.name = name;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 }

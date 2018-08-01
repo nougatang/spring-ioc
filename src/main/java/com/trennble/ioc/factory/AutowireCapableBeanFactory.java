@@ -1,6 +1,7 @@
 package com.trennble.ioc.factory;
 
 import com.trennble.ioc.BeanDefinition;
+import com.trennble.ioc.BeanReference;
 import com.trennble.ioc.PropertyValue;
 
 import java.lang.reflect.Field;
@@ -11,6 +12,7 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
     protected Object doCreateBean(BeanDefinition beanDefinition) {
         try {
             Object bean = createBeanInstance(beanDefinition);
+            beanDefinition.setBean(bean);
             applyPropertyValues(bean, beanDefinition);
             return bean;
         } catch (Exception e) {
@@ -28,7 +30,12 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
         for (PropertyValue propertyValue : propertyValues) {
             Field declaredField = bean.getClass().getDeclaredField(propertyValue.getName());
             declaredField.setAccessible(true);
-            declaredField.set(bean, propertyValue.getValue());
+            Object value = propertyValue.getValue();
+            if (value instanceof BeanReference) {
+                BeanReference reference = (BeanReference) value;
+                value = getBean(reference.getName());
+            }
+            declaredField.set(bean, value);
         }
     }
 }

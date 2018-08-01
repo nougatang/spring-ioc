@@ -1,6 +1,7 @@
 package com.trennble.ioc.reader;
 
 import com.trennble.ioc.BeanDefinition;
+import com.trennble.ioc.BeanReference;
 import com.trennble.ioc.PropertyValue;
 import com.trennble.ioc.io.Resource;
 import com.trennble.ioc.io.ResourceLoader;
@@ -69,14 +70,22 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     private void processPropertyValue(BeanDefinition beanDefinition, Element element){
         NodeList propertys = element.getElementsByTagName("property");
         for (int i=0;i<propertys.getLength();i++){
-            Node node = propertys.item(0);
+            Node node = propertys.item(i);
             if (node instanceof Element) {
                 Element propertyEle = (Element) node;
                 String name = propertyEle.getAttribute("name");
                 String value = propertyEle.getAttribute("value");
-                PropertyValue propertyValue=new PropertyValue(name,value);
-                //设置bean属性
-                beanDefinition.getPropertyValues().addPropertyValue(propertyValue);
+                if (value != null && value.length() > 0) {
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                } else {
+                    String ref = propertyEle.getAttribute("ref");
+                    if (ref == null || ref.length() == 0) {
+                        throw new IllegalArgumentException("Configuration problem: <property> element for property '" + name + "' must specify a ref or value");
+                    }
+
+                    BeanReference beanReference = new BeanReference(ref);
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
+                }
             }
         }
     }

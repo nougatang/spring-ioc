@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
     <bean name="helloWorldService" class="com.trennble.ioc.HelloWorldService">
-        <property name="value" value="everyone"/>
+        <property name="outerService" ref="outerService"/>
+    </bean>
+
+    <bean name="outerService" class="com.trennble.ioc.OuterService">
+        <property name="value" value="Hello World!"/>
+        <property name="helloWorldService" ref="helloWorldService"/>
     </bean>
 </beans>
