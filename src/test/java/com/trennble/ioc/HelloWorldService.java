@@ -2,7 +2,9 @@ package com.trennble.ioc;
 
 public class HelloWorldService {
 
-    public void helloWorld(){
-        System.out.println("Hello World!");
+    private String value;
+
+    public void helloWorld() {
+        System.out.println("Hello: " + value);
     }
 }
