@@ -2,7 +2,6 @@ package com.trennble.ioc;
 
 import com.trennble.ioc.factory.AbstractBeanFactory;
 import com.trennble.ioc.factory.AutowireCapableBeanFactory;
-import com.trennble.ioc.factory.BeanFactory;
 import com.trennble.ioc.io.ResourceLoader;
 import com.trennble.ioc.reader.XmlBeanDefinitionReader;
 import org.junit.Test;
@@ -14,7 +13,7 @@ public class BeanFactoryTest {
     @Test
     public void test() {
         // 1.初始化beanfactory
-        BeanFactory beanFactory = new AutowireCapableBeanFactory();
+        AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
 
         // 2.指定配置文件
         ResourceLoader resourceLoader = new ResourceLoader();
@@ -27,7 +26,7 @@ public class BeanFactoryTest {
         }
 
         // 5.获取bean
-        HelloWorldService helloWorldService = (HelloWorldService) beanFactory.getBean("helloWorldService");
+        HelloWorldServiceImpl helloWorldService = (HelloWorldServiceImpl) beanFactory.getBean("helloWorldService");
         helloWorldService.helloWorld();
 
     }

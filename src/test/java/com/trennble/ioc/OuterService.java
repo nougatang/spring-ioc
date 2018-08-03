@@ -2,7 +2,7 @@ package com.trennble.ioc;
 
 public class OuterService {
     private String value;
-    private HelloWorldService helloWorldService;
+    private HelloWorldServiceImpl helloWorldService;
 
     public OuterService() {
     }
