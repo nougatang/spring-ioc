@@ -9,21 +9,6 @@ import java.util.List;
 
 public class AutowireCapableBeanFactory extends AbstractBeanFactory {
 
-    protected Object doCreateBean(BeanDefinition beanDefinition) {
-        try {
-            Object bean = createBeanInstance(beanDefinition);
-            beanDefinition.setBean(bean);
-            applyPropertyValues(bean, beanDefinition);
-            return bean;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    protected Object createBeanInstance(BeanDefinition beanDefinition) throws Exception {
-        return beanDefinition.getBeanClass().newInstance();
-    }
 
     protected void applyPropertyValues(Object bean, BeanDefinition beanDefinition) throws Exception {
         List<PropertyValue> propertyValues = beanDefinition.getPropertyValues().getPropertyValues();

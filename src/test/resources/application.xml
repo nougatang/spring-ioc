@@ -9,4 +9,7 @@
         <property name="value" value="Hello World!"/>
         <property name="helloWorldService" ref="helloWorldService"/>
     </bean>
+
+    <bean name="beanInitializeLogger" class="com.trennble.ioc.BeanInitializeLogger">
+    </bean>
 </beans>

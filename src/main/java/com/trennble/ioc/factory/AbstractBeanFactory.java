@@ -1,6 +1,7 @@
 package com.trennble.ioc.factory;
 
 import com.trennble.ioc.BeanDefinition;
+import com.trennble.ioc.BeanPostProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +14,35 @@ public abstract class AbstractBeanFactory implements BeanFactory {
 
     private List<String> beanDefinitionNames = new ArrayList<String>();
 
-    public Object getBean(String name) {
+    private List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();
+
+    public Object getBean(String name) throws Exception {
         BeanDefinition beanDefinition = beanDefinitionMap.get(name);
         if (beanDefinition == null) {
             throw new IllegalArgumentException("No bean named " + name + " is defined");
         } else {
             Object bean = beanDefinition.getBean();
             if (bean == null) {
-                bean = this.doCreateBean(beanDefinition);
+                bean = doCreateBean(beanDefinition);
+                initializeBean(bean,name);
             }
             return bean;
         }
+    }
+
+    protected void initializeBean(Object bean, String name) throws Exception {
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            bean = beanPostProcessor.postProcessBeforeInitialization(bean, name);
+        }
+
+        // TODO:call initialize method
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessors) {
+            bean = beanPostProcessor.postProcessAfterInitialization(bean, name);
+        }
+    }
+
+    protected Object createBeanInstance(BeanDefinition beanDefinition) throws Exception {
+        return beanDefinition.getBeanClass().newInstance();
     }
 
     public void registerBeanDefinition(String name, BeanDefinition beanDefinition) {
@@ -31,11 +50,34 @@ public abstract class AbstractBeanFactory implements BeanFactory {
         beanDefinitionMap.put(name, beanDefinition);
     }
 
-    public void preInstantiateSingletons() {
+    public void preInstantiateSingletons() throws Exception {
         for (String name : beanDefinitionNames) {
             getBean(name);
         }
     }
 
-    protected abstract Object doCreateBean(BeanDefinition beanDefinition);
+    protected Object doCreateBean(BeanDefinition beanDefinition) throws Exception {
+        Object bean = createBeanInstance(beanDefinition);
+        beanDefinition.setBean(bean);
+        applyPropertyValues(bean, beanDefinition);
+        return bean;
+    }
+
+    protected void applyPropertyValues(Object bean, BeanDefinition beanDefinition) throws Exception {
+
+    }
+
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor){
+        this.beanPostProcessors.add(beanPostProcessor);
+    }
+
+    public List getBeansForType(Class type) throws Exception {
+        List beans = new ArrayList<Object>();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            if (type.isAssignableFrom(beanDefinitionMap.get(beanDefinitionName).getBeanClass())) {
+                beans.add(getBean(beanDefinitionName));
+            }
+        }
+        return beans;
+    }
 }
