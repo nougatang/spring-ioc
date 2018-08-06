@@ -2,12 +2,12 @@ package com.trennble.ioc.aop;
 
 import com.trennble.ioc.HelloWorldService;
 import com.trennble.ioc.HelloWorldServiceImpl;
-import com.trennble.ioc.aop.proxy.JdkDynamicAopProxy;
+import com.trennble.ioc.aop.proxy.Cglib2AopProxy;
 import com.trennble.ioc.bean.context.ApplicationContext;
 import com.trennble.ioc.bean.context.ClassPathXmlApplicationContext;
 import org.junit.Test;
 
-public class JdkDynamicAopProxyTest {
+public class Cglib2AopProxyTest {
 
 	@Test
 	public void testInterceptor() throws Exception {
@@ -28,11 +28,11 @@ public class JdkDynamicAopProxyTest {
 		advisedSupport.setMethodInterceptor(timerInterceptor);
 
 		// 3. 创建代理(Proxy)
-		JdkDynamicAopProxy jdkDynamicAopProxy = new JdkDynamicAopProxy(advisedSupport);
-		HelloWorldService helloWorldServiceProxy = (HelloWorldService) jdkDynamicAopProxy.getProxy();
+        Cglib2AopProxy cglib2AopProxy = new Cglib2AopProxy(advisedSupport);
+		HelloWorldService helloWorldServiceProxy = (HelloWorldService) cglib2AopProxy.getProxy();
 
-        // 4. 基于AOP的调用
-        helloWorldServiceProxy.helloWorld();
+		// 4. 基于AOP的调用
+		helloWorldServiceProxy.helloWorld();
 
 	}
 }

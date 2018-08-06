@@ -8,12 +8,11 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public class JdkDynamicAopProxy implements AopProxy, InvocationHandler {
+public class JdkDynamicAopProxy extends AbstractAopProxy implements InvocationHandler {
 
-    private AdvisedSupport advised;
 
     public JdkDynamicAopProxy(AdvisedSupport advised) {
-        this.advised = advised;
+        super(advised);
     }
 
 
@@ -29,7 +28,7 @@ public class JdkDynamicAopProxy implements AopProxy, InvocationHandler {
     }
 
     public Object getProxy() {
-        return Proxy.newProxyInstance(getClass().getClassLoader(), advised.getTargetSource().getTargetClass(), this);
+        return Proxy.newProxyInstance(getClass().getClassLoader(), advised.getTargetSource().getInterfaces(), this);
     }
 
 }
