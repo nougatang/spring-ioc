@@ -42,7 +42,7 @@ public class BeanFactoryTest {
         }
 
         beanFactory.preInstantiateSingletons();
-        OutputService outerService = (OutputService) beanFactory.getBean("outputService");
+        OuterService outerService = (OuterService) beanFactory.getBean("outputService");
         outerService.output("test");
     }
 }

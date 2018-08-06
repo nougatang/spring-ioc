@@ -12,12 +12,11 @@
         <property name="expression" value="execution(* com.trennble.ioc.*.*(..))"/>
     </bean>
 
-    <bean id="outputService" class="com.trennble.ioc.OutputServiceImpl">
-    </bean>
+    <bean id="outerService" class="com.trennble.ioc.OuterServiceImpl"/>
 
     <bean id="helloWorldService" class="com.trennble.ioc.HelloWorldServiceImpl">
         <property name="text" value="Hello World!"/>
-        <property name="outputService" ref="outputService"/>
+        <property name="outputService" ref="outerService"/>
     </bean>
 
 </beans>

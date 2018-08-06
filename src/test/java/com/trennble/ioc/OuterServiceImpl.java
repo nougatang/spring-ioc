@@ -3,7 +3,7 @@ package com.trennble.ioc;
 /**
  * @author yihua.huang@dianping.com
  */
-public class OutputServiceImpl implements OutputService {
+public class OuterServiceImpl implements OuterService {
 
     public void output(String text) {
         System.out.println(text);

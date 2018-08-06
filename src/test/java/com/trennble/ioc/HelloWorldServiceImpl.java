@@ -7,7 +7,7 @@ public class HelloWorldServiceImpl implements HelloWorldService {
 
     private String text;
 
-    private OutputService outputService;
+    private OuterService outputService;
 
     public void helloWorld() {
         outputService.output(text);
@@ -17,7 +17,7 @@ public class HelloWorldServiceImpl implements HelloWorldService {
         this.text = text;
     }
 
-    public void setOutputService(OutputService outputService) {
+    public void setOutputService(OuterService outputService) {
         this.outputService = outputService;
     }
 
