@@ -1,5 +1,6 @@
 package com.trennble.ioc.aop;
 
+import com.trennble.ioc.aop.pointcut.MethodMatcher;
 import org.aopalliance.intercept.MethodInterceptor;
 
 /**

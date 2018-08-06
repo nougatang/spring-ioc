@@ -5,9 +5,9 @@
 
     <bean id="timeInterceptor" class="com.trennble.ioc.aop.TimerInterceptor"/>
 
-    <bean id="autoProxyCreator" class="com.trennble.ioc.aop.AspectJAwareAdvisorAutoProxyCreator"/>
+    <bean id="autoProxyCreator" class="com.trennble.ioc.aop.aware.AspectJAwareAdvisorAutoProxyCreator"/>
 
-    <bean id="aspectjAspect" class="com.trennble.ioc.aop.AspectJExpressionPointcutAdvisor">
+    <bean id="aspectjAspect" class="com.trennble.ioc.aop.advisor.AspectJExpressionPointcutAdvisor">
         <property name="advice" ref="timeInterceptor"/>
         <property name="expression" value="execution(* com.trennble.ioc.*.*(..))"/>
     </bean>

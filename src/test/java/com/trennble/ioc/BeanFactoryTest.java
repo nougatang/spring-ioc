@@ -1,9 +1,10 @@
 package com.trennble.ioc;
 
-import com.trennble.ioc.factory.AbstractBeanFactory;
-import com.trennble.ioc.factory.AutowireCapableBeanFactory;
-import com.trennble.ioc.io.ResourceLoader;
-import com.trennble.ioc.reader.XmlBeanDefinitionReader;
+import com.trennble.ioc.bean.BeanDefinition;
+import com.trennble.ioc.bean.factory.AbstractBeanFactory;
+import com.trennble.ioc.bean.factory.AutowireCapableBeanFactory;
+import com.trennble.ioc.bean.io.ResourceLoader;
+import com.trennble.ioc.bean.reader.XmlBeanDefinitionReader;
 import org.junit.Test;
 
 import java.util.Map;

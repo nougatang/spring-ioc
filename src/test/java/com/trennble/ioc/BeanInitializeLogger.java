@@ -1,5 +1,7 @@
 package com.trennble.ioc;
 
+import com.trennble.ioc.bean.BeanPostProcessor;
+
 public class BeanInitializeLogger implements BeanPostProcessor {
 	
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws Exception {

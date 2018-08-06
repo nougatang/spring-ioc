@@ -1,8 +1,9 @@
 package com.trennble.ioc.aop;
 
 import com.trennble.ioc.HelloWorldService;
-import com.trennble.ioc.context.ApplicationContext;
-import com.trennble.ioc.context.ClassPathXmlApplicationContext;
+import com.trennble.ioc.aop.proxy.JdkDynamicAopProxy;
+import com.trennble.ioc.bean.context.ApplicationContext;
+import com.trennble.ioc.bean.context.ClassPathXmlApplicationContext;
 import org.junit.Test;
 
 public class JdkDynamicAopProxyTest {

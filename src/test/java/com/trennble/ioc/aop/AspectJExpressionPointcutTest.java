@@ -2,6 +2,7 @@ package com.trennble.ioc.aop;
 
 import com.trennble.ioc.HelloWorldService;
 import com.trennble.ioc.HelloWorldServiceImpl;
+import com.trennble.ioc.aop.pointcut.AspectJExpressionPointcut;
 import org.junit.Assert;
 import org.junit.Test;
 
