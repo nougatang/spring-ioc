@@ -7,18 +7,19 @@ public class TargetSource {
 
     private Object target;
 
-    private Class targetClass;
+    private Class<?>[] targetClass;
 
-    public TargetSource(Object target, Class targetClass) {
+
+    public TargetSource(Object target, Class<?>... targetClass) {
         this.target = target;
         this.targetClass = targetClass;
     }
 
-    public Object getTarget() {
-        return target;
+    public Class<?>[] getTargetClass() {
+        return targetClass;
     }
 
-    public Class getTargetClass() {
-        return targetClass;
+    public Object getTarget() {
+        return target;
     }
 }

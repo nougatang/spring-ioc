@@ -6,7 +6,7 @@ import org.junit.Test;
 public class ApplicationContextTest {
 
     @Test
-    public void test() {
+    public void test() throws Exception {
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("application.xml");
         HelloWorldServiceImpl helloWorldService = (HelloWorldServiceImpl) applicationContext.getBean("helloWorldService");
         helloWorldService.helloWorld();

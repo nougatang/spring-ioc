@@ -1,21 +1,24 @@
 package com.trennble.ioc;
 
+/**
+ * @author yihua.huang@dianping.com
+ */
 public class HelloWorldServiceImpl implements HelloWorldService {
-    private String value;
-    private OuterService outerService;
 
-    public HelloWorldServiceImpl() {
-    }
+    private String text;
+
+    private OutputService outputService;
 
     public void helloWorld() {
-        System.out.println("Hello: " + this.value);
+        outputService.output(text);
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public void setOuterService(OuterService outerService) {
-        this.outerService = outerService;
+    public void setOutputService(OutputService outputService) {
+        this.outputService = outputService;
     }
+
 }

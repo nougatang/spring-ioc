@@ -1,7 +1,6 @@
 package com.trennble.ioc.aop;
 
 import com.trennble.ioc.HelloWorldService;
-import com.trennble.ioc.HelloWorldServiceImpl;
 import com.trennble.ioc.context.ApplicationContext;
 import com.trennble.ioc.context.ClassPathXmlApplicationContext;
 import org.junit.Test;

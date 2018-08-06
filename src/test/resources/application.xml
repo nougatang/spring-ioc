@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans>
-    <bean name="helloWorldService" class="com.trennble.ioc.HelloWorldServiceImpl">
-        <property name="value" value="everyone"/>
-        <property name="outerService" ref="outerService"/>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="timeInterceptor" class="com.trennble.ioc.aop.TimerInterceptor"/>
+
+    <bean id="autoProxyCreator" class="com.trennble.ioc.aop.AspectJAwareAdvisorAutoProxyCreator"/>
+
+    <bean id="aspectjAspect" class="com.trennble.ioc.aop.AspectJExpressionPointcutAdvisor">
+        <property name="advice" ref="timeInterceptor"/>
+        <property name="expression" value="execution(* com.trennble.ioc.*.*(..))"/>
     </bean>
 
-    <bean name="outerService" class="com.trennble.ioc.OuterService">
-        <property name="value" value="Hello World!"/>
-        <property name="helloWorldService" ref="helloWorldService"/>
+    <bean id="outputService" class="com.trennble.ioc.OutputServiceImpl">
     </bean>
 
-    <bean name="beanInitializeLogger" class="com.trennble.ioc.BeanInitializeLogger">
+    <bean id="helloWorldService" class="com.trennble.ioc.HelloWorldServiceImpl">
+        <property name="text" value="Hello World!"/>
+        <property name="outputService" ref="outputService"/>
     </bean>
+
 </beans>

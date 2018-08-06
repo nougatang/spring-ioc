@@ -11,7 +11,7 @@ import java.util.Map;
 public class BeanFactoryTest {
 
     @Test
-    public void test() {
+    public void test() throws Exception {
         // 1.初始化beanfactory
         AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
 
@@ -32,7 +32,7 @@ public class BeanFactoryTest {
     }
 
     @Test
-    public void reference() {
+    public void reference() throws Exception {
         AbstractBeanFactory beanFactory = new AutowireCapableBeanFactory();
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
         xmlBeanDefinitionReader.loadBeanDefinition("application.xml");
@@ -42,7 +42,7 @@ public class BeanFactoryTest {
         }
 
         beanFactory.preInstantiateSingletons();
-        OuterService outerService = (OuterService) beanFactory.getBean("outerService");
-        outerService.doSomeThing();
+        OutputService outerService = (OutputService) beanFactory.getBean("outputService");
+        outerService.output("test");
     }
 }
