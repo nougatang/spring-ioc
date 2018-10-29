@@ -29,10 +29,10 @@ public class Cglib2AopProxyTest {
 
 		// 3. 创建代理(Proxy)
         Cglib2AopProxy cglib2AopProxy = new Cglib2AopProxy(advisedSupport);
-		HelloWorldService helloWorldServiceProxy = (HelloWorldService) cglib2AopProxy.getProxy();
+		HelloWorldServiceImpl helloWorldServiceProxy = (HelloWorldServiceImpl) cglib2AopProxy.getProxy();
 
 		// 4. 基于AOP的调用
-		helloWorldServiceProxy.helloWorld();
+		helloWorldServiceProxy.extra();
 
 	}
 }

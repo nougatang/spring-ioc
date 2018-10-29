@@ -13,6 +13,10 @@ public class HelloWorldServiceImpl implements HelloWorldService {
         outputService.output(text);
     }
 
+    public void extra() {
+        outputService.output("extra method");
+    }
+
     public void setText(String text) {
         this.text = text;
     }
